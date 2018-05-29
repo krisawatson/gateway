@@ -1,0 +1,21 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+      - id: auth
+        uri: http://localhost:8001
+        predicates:
+        - Path=/auth/v1/**
+        filters:
+        - RewritePath=/auth/v1/(?<path>.*), /auth/v1/$\{path}
+      - id: user
+        uri: http://localhost:8002
+        predicates:
+        - Path=/user/v1/**
+        filters:
+        - RewritePath=/user/v1/(?<path>.*), /user/v1/$\{path}
