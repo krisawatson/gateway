@@ -10,7 +10,7 @@ deployment:
   version: 1
 service:
   name: gateway
-  type: LoadBalancer
+  type: NodePort
   externalPort: 8000
   internalPort: 8000
   version: 1

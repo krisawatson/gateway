@@ -19,6 +19,7 @@ File yamlFile = new File('src/main/resources/application.yaml')
 Map properties = (Map) yaml.load(yamlFile.text)
 
 def appName = properties['spring']['application']['name']
+def release = properties['spring']['application']['release']
 def dockerRepo = 'krisawatson'
 
 task buildDocker(type: Docker, dependsOn: build) {
@@ -36,7 +37,7 @@ task buildDocker(type: Docker, dependsOn: build) {
 task helm() {
     doLast {
         exec {
-            commandLine "helm", "install", "./src/main/helm"
+            commandLine "helm", "upgrade", "--install", release, "./src/main/helm"
         }
     }
 }
