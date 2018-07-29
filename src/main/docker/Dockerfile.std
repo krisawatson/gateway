@@ -1,4 +1,4 @@
-FROM oysteinjakobsen/armv7-oracle-java8
+FROM frolvlad/alpine-oraclejdk8:slim
 VOLUME /tmp
 ADD gateway-1.0.0.jar gateway-1.0.0.jar
 RUN sh -c 'touch /gateway-1.0.0.jar'

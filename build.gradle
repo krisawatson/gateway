@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.2.RELEASE'
+        springGradleVersion = '2.0.3.RELEASE'
     }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springGradleVersion}")
         classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
@@ -30,7 +30,7 @@ repositories {
 
 
 ext {
-    springCloudVersion = 'Finchley.BUILD-SNAPSHOT'
+    springCloudVersion = 'Finchley.RELEASE'
 }
 
 dependencies {

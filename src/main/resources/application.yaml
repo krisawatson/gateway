@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: gateway
-    release: gw-dev
   cloud:
     gateway:
       routes:
