@@ -29,7 +29,9 @@ metadata:
     chart: gateway-1.0.0
     release: gw-dev
 spec:
-  type: NodePort
+  type: LoadBalancer
+  externalIPs:
+  - 192.168.0.66
   ports:
   - port: 8000
     targetPort: 8000
