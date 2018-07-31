@@ -24,6 +24,9 @@ def dockerRepo = 'krisawatson'
 
 task buildDocker(type: Docker, dependsOn: build) {
     dockerfile = file('src/main/docker/Dockerfile')
+    if (project.hasProperty("buildType")){
+        dockerfile = file("src/main/docker/$buildType/Dockerfile")
+    }
     tag = dockerRepo + "/" + appName
     push = true
     doFirst {
@@ -38,6 +41,22 @@ task helm() {
     doLast {
         exec {
             commandLine "helm", "upgrade", "--install", release, "./src/main/helm"
+        }
+    }
+}
+
+bootRun{}
+
+task runDev(dependsOn:bootRun) {
+    // TaskExecutionGraph is populated only after
+    // all the projects in the build have been evaulated https://docs.gradle.org/current/javadoc/org/gradle/api/execution/TaskExecutionGraph.html#whenReady-groovy.lang.Closure-
+    gradle.taskGraph.whenReady { graph ->
+        logger.lifecycle('>>> Setting spring.profiles.active to dev')
+        if (graph.hasTask(runDev)) {
+            // configure task before it is executed
+            bootRun {
+                args = ["--spring.profiles.active=dev"]
+            }
         }
     }
 }
