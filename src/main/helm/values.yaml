@@ -13,5 +13,5 @@ service:
   type: LoadBalancer
   externalPort: 8000
   internalPort: 8000
-  nodePort: 30001
+  nodePort: 30002
   version: 1
